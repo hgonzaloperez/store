@@ -1,7 +1,7 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'app-counter.components',
+  selector: 'app-counter',
   imports: [],
   templateUrl: './counter.components.html',
   styleUrl: './counter.components.css',
@@ -23,5 +23,23 @@ export class CounterComponents {
     console.log('counter components ngOnChanges');
     console.log('-'.repeat(10)  );
     console.log(changes);
+  }
+
+    ngOnInit() {
+    console.log('ngOnInit');
+    console.log('-'.repeat(10)  );
+    console.log('Duration: ', this.duration);
+    console.log('Message: ', this.message);
+  } 
+
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+    console.log('-'.repeat(10)  );
+
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy');
+    console.log('-'.repeat(10)  );
   }
 }
