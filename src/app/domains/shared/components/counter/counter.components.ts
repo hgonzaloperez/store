@@ -39,7 +39,7 @@ export class CounterComponents {
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
+    console.log('ngOnDestroy ');
     console.log('-'.repeat(10)  );
   }
 }
