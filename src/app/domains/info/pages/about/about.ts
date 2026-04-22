@@ -1,14 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';   
-
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CounterComponents } from "../../../shared/components/counter/counter.components";
-
+import { WaveAdudio} from '../../components/wave-adudio/wave-adudio';
 
 @Component({
   selector: 'app-about',
-  imports: [CounterComponents, CommonModule],
+  imports: [CounterComponents, WaveAdudio],
   templateUrl: './about.html',
   styleUrl: './about.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class About {
   duration = signal(1000);
@@ -27,4 +26,6 @@ export class About {
   ngOnInit() {
     console.log('ngOnInit');
   }
+
+  
 }

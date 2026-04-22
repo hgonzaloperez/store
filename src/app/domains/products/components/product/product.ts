@@ -1,22 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Product as ProductModel } from '../../../shared/models/product.model';
 
 @Component({
   selector: 'app-product',
-  imports: [CommonModule],
   templateUrl: './product.html',
   styleUrl: './product.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Product {
 
-  @Input({required: true})  img: string = '';
-  @Input() price: number = 0;
-  @Input() title: string = '';
+  product = input.required<ProductModel>();
 
-  @Output() addToCart = new EventEmitter;
+  addToCart = output<string>();
+
   onAddToCart() {
-    console.log('click  from child');
-    this.addToCart.emit('hola este es el producto ' + this.title + ' (desde el hijo)');
+    console.log('click from child');
+    this.addToCart.emit('hola este es el producto ' + this.product().title + ' (desde el hijo)');
   }
   
 
