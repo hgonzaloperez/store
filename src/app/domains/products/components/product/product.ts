@@ -1,24 +1,19 @@
 import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { Product as ProductModel } from '../../../shared/models/product.model';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.html',
+  imports: [NgOptimizedImage],
   styleUrl: './product.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Product {
-
   product = input.required<ProductModel>();
-
-  addToCart = output<string>();
+  addToCart = output<ProductModel>();
 
   onAddToCart() {
-    console.log('click from child');
-    this.addToCart.emit('hola este es el producto ' + this.product().title + ' (desde el hijo)');
+    this.addToCart.emit(this.product());
   }
-  
-
-    
-  
 }
