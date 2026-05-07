@@ -39,7 +39,10 @@
       </ul>
     </div>
     <div class="flex items-center">
-      <button class="px-4" (click)="toogleSideMenu()">
+      <button class="p-2 border rounded relative" (click)="toogleSideMenu()">
+        <div class = "absolute -top-4 -left-4 rounded h-5 w-5 bg-black text-white text-xs flex items-center justify-center">
+          {{ cart().length }}
+        </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -82,8 +85,12 @@
     </button>
   </div>
   @for (product of cart(); track product.title) {
-    <div>
+    <div class = "flex space-x-2 items-center">
+      <img class = "w-6 h-6" [src]="product.image" [alt]="product.title">
       <p>{{product.title}} - ${{product.price}}</p>
     </div>
   }
+  <div class = "flex justify-end mt-4">
+    <p class = "text-lg font-bold">Total: ${{total()}}</p>
+  </div>
 </div>
