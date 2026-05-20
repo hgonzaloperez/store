@@ -16,22 +16,26 @@
       <ul class="flex space-x-6">
         <li>
           <a
-            href="#"
-            class="block underline hover:underline"
+            routerLink="/"
+            routerLinkActive="underline"
+            [routerLinkActiveOptions]="{exact:true}"
+            class="block hover:underline"
             aria-current="page"
             >Home</a
           >
         </li>
         <li>
           <a
-            href="#"
+           routerLink="/about"
+            routerLinkActive="underline"
             class="block hover:underline"
             >About</a
           >
         </li>
         <li>
           <a
-            href="#"
+            routerLink="/services"
+            routerLinkActive="underline"
             class="block hover:underline"
             >Services</a
           >
@@ -86,7 +90,7 @@
   </div>
   @for (product of cart(); track product.title) {
     <div class = "flex space-x-2 items-center">
-      <img class = "w-6 h-6" [src]="product.image" [alt]="product.title">
+      <img class = "w-6 h-6" [src]="(product.image ?? product.images[0]) || 'https://via.placeholder.com/24'" [alt]="product.title">
       <p>{{product.title}} - ${{product.price}}</p>
     </div>
   }

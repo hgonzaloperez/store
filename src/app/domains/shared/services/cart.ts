@@ -5,7 +5,10 @@ import { Product } from '../models/product.model';
 @Injectable({
   providedIn: 'root',
 })
-export class Cart {
+export class CartService {
+  getAllCategories() {
+    throw new Error('Method not implemented.');
+  }
 
   cart = signal<Product[]>([]);
 

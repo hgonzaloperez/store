@@ -2,6 +2,7 @@ import { Component, Input, signal, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
+  standalone: true,
   imports: [],
   templateUrl: './counter.components.html',
   styleUrl: './counter.components.css',

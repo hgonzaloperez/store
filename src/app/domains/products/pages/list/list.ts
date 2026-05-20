@@ -1,73 +1,37 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, Input, SimpleChange, SimpleChanges } from '@angular/core';
 import { Product } from './../../components/product/product';
-import { Product as ProductModel } from '../../../shared/models/product.model';
-import { Header }  from '../../../shared/components/header/header';
-import { Cart } from '../../../shared/services/cart';
+import { Product as ProductModel } from '@shared/models/product.model';
+import { Header }  from '@shared/components/header/header';
+import { CartService } from '@shared/services/cart';
+import { ProductService } from '@shared/services/product';
+import { CategoryService } from '@shared/services/category';
+import { Category } from '@shared/models/category.model';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-list',
-  imports: [Product, Header],
+  imports: [Product, Header, RouterLink],
   templateUrl: './list.html',
   styleUrl: './list.css',
 })
 export class List {
 
   products = signal<ProductModel[]>([]);
- private cartService = inject(Cart);
+  categories = signal<Category[]>([]);
 
-  constructor() {
-    const initProducts: ProductModel[] = [
-      {
-        id: Date.now(),  
-        title: 'Product 1',
-        price: 10,
-        image: 'https://picsum.photos/200/300?r=23'  
-      },
-       {
-        id: Date.now(),  
-        title: 'Product 2',
-        price: 20,
-        image: 'https://picsum.photos/200/300?r=12'  
-      },
-      {
-        id: Date.now(),  
-        title: 'Product 1',
-        price: 10,
-        image: 'https://picsum.photos/200/300?r=23'  
-      },
-       {
-        id: Date.now(),  
-        title: 'Product 2',
-        price: 20,
-        image: 'https://picsum.photos/200/300?r=12'  
-      },
-       {
-        id: Date.now(),  
-        title: 'Product 2',
-        price: 20,
-        image: 'https://picsum.photos/200/300?r=12'  
-      },
-      {
-        id: Date.now(),  
-        title: 'Product 1',
-        price: 10,
-        image: 'https://picsum.photos/200/300?r=23'  
-      },
-       {
-        id: Date.now(),  
-        title: 'Product 2',
-        price: 20,
-        image: 'https://picsum.photos/200/300?r=12'  
-      },
-       {
-        id: Date.now(),  
-        title: 'Product 2',
-        price: 20,
-        image: 'https://picsum.photos/200/300?r=12'  
-      },
-    ]
-    this.products.set(initProducts);
-  } 
+  private cartService = inject(CartService);
+  private productService = inject(ProductService);
+  private categoryService = inject(CategoryService);
+  @Input () categoryId?: string; 
+
+
+  ngOnChanges(changes: SimpleChanges) {
+      this.getProducts();
+  }
+
+ ngOnInit() {
+    this.getCategories();
+  }
 
 
 
@@ -75,4 +39,31 @@ export class List {
     this.cartService.addToCart(product);
   }
 
+  private getProducts() {
+     this.productService.getProducts(this.categoryId).subscribe({
+      next: (products) => {
+        this.products.set(products);
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      }
+    });
+  }
+
+  private getCategories() {
+    this.categoryService.getAllCategories().subscribe({
+      next: (data) => {
+        this.categories.set(data);
+      },
+      error: (err) => {
+        console.error('Error fetching categories:', err);
+      }
+    });
+  }
 }
+
+      
+
+  
+
+

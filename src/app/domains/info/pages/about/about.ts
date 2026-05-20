@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { CounterComponents } from "../../../shared/components/counter/counter.components";
+import { CounterComponents } from "@shared/components/counter/counter.components";
+import { HighLight } from "@shared/directives/high-light";
 import { WaveAdudio} from '../../components/wave-adudio/wave-adudio';
+import { Header } from "@shared/components/header/header";
 
 @Component({
   selector: 'app-about',
-  imports: [CounterComponents, WaveAdudio],
+  imports: [CounterComponents, HighLight, WaveAdudio, Header],
   templateUrl: './about.html',
   styleUrl: './about.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

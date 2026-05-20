@@ -3,6 +3,7 @@ import WaveSurfer from 'wavesurfer.js';
 
 @Component({
   selector: 'app-wave-adudio',
+  standalone: true,
   templateUrl: './wave-adudio.html',
   styleUrl: './wave-adudio.css',
 })
