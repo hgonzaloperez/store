@@ -10,7 +10,8 @@ import { CartService } from '@shared/services/cart';
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.css',
 })
-export class ProductDetail implements OnInit {
+
+export default class ProductDetail implements OnInit {
 
   @Input() id!: number;
   product = signal<Product | null>(null);
