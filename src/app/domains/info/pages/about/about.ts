@@ -11,7 +11,8 @@ import { Header } from "@shared/components/header/header";
   styleUrl: './about.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class About {
+
+export default class About {
   duration = signal(1000);
   message = signal('Hola');
 
